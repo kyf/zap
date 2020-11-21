@@ -40,7 +40,7 @@ func Ginzap(logger *zap.Logger, timeFormat string, utc bool) gin.HandlerFunc {
 		if len(c.Errors) > 0 {
 			// Append error field if this is an erroneous request.
 			for _, e := range c.Errors.Errors() {
-				logger.Error(e)
+				logger.Error(e, zap.String("stack", string(debug.Stack())))
 			}
 		} else {
 			logger.Info(path,
